@@ -16,3 +16,6 @@ buildNumber.properties
 **/target
 .idea
 **/.gitignore
+**/README.md
+**/LICENSE
+**/Dockerfile
