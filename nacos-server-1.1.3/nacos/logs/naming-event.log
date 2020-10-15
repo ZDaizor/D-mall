@@ -1,0 +1,14 @@
+2020-10-15 17:30:06,547 INFO DEFAULT_GROUP@@mall-gateway {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.10.141:8080:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-10-15 17:30:06,551 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@mall-gateway, ips: 192.168.10.141:8080_true,
+
+2020-10-15 17:37:46,710 INFO {POS} {IP-DISABLED} valid: 192.168.10.141:8080@DEFAULT@DEFAULT_GROUP@@mall-gateway, region: unknown, msg: client timeout after 15000, last beat: 1602754646966
+
+2020-10-15 17:38:01,871 INFO DEFAULT_GROUP@@mall-gateway {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [192.168.10.141:8080:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2020-10-15 17:38:01,871 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@mall-gateway, ips: 
+
+2020-10-15 17:44:53,778 INFO DEFAULT_GROUP@@mall-gateway {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.10.141:8080:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2020-10-15 17:44:53,778 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@mall-gateway, ips: 192.168.10.141:8080_true,
+

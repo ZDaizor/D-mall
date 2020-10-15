@@ -2,9 +2,12 @@ package com.daizor.mallcoupon.controller;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +27,29 @@ import com.daizor.common.utils.R;
  * @email xingzuozhou@gmail.com
  * @date 2020-09-25 14:35:47
  */
+@RefreshScope
 @RestController
 @RequestMapping("mallcoupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
 
+    @Value("${coupon.user.name}")
+    private String name;
+
+    @Value("${coupon.user.age}")
+    private Integer age;
+
+    /**
+     *获取用户名、年龄信息
+     */
+    @RequestMapping("/info")
+    public R info() {
+        Map<String, Object> stringObjectHashMap = new HashMap<>();
+        stringObjectHashMap.put("name", name);
+        stringObjectHashMap.put("age", age);
+        return R.ok().put("info", Collections.singletonList(stringObjectHashMap));
+    }
 
     /**
      *查找会员对应的优惠券信息

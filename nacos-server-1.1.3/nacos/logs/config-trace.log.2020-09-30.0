@@ -1,0 +1,4 @@
+2020-09-30 10:35:43,516|192.168.10.134|mall-coupon|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-09-30 10:35:43,968|192.168.10.134|mall-coupon.properties|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-09-30 10:37:48,385|192.168.10.134|mall-coupon|DEFAULT_GROUP|null|unknown|-1|pull|not-found|-1|127.0.0.1
+2020-09-30 10:37:48,921|192.168.10.134|mall-coupon.yml|DEFAULT_GROUP|null|unknown|1601370890777|pull|ok|62578144|127.0.0.1
