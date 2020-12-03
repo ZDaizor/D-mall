@@ -31,14 +31,13 @@ public class CategoryController {
     /**
      * 查出所有分类及子分类，并按照树形展示
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/tree")
     public R list() {
         List<CategoryEntity> categoryEntities = categoryService.listByTree();
         log.info("取出的一级分类为 : " + categoryEntities);
         return R.ok().put("data", categoryEntities);
     }
-
-
+    
     /**
      * 信息
      */

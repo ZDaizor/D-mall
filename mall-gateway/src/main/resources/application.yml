@@ -10,13 +10,39 @@ spring:
           uri: https://www.qq.com
           predicates:
             - Query=url,qq
+        - id: product_route
+          uri: lb://mall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/product/(?<segment>.*),/mallproduct/$\{segment}
+            #                防止机器人频繁刷验证码，同一IP一秒中之内只能访问一次
         - id: admin_route
           uri: lb://renren-fast
           predicates:
             - Path=/api/**
           filters:
+            #            - StripPrefix=1
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+            - name: RequestRateLimiter
+              args:
+                deny-empty-key: true
+                keyResolver: '#{@ipAddressKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 50
+              #          filters:
+          #            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+
+
+
+  redis:
+    host: 192.168.198.128
+    port: 6379
+
 server:
   port: 12345
-
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

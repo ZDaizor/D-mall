@@ -19,3 +19,4 @@ buildNumber.properties
 **/README.md
 **/LICENSE
 **/Dockerfile
+**/.iml
