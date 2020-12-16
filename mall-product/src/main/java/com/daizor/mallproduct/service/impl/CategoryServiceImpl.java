@@ -40,12 +40,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         List<CategoryEntity> categoryEntities = baseMapper.selectList(null);
         return categoryEntities.stream()
                 .filter(categoryEntity -> categoryEntity.getParentCid() == 0L)
-                //peek : 不改变流元素中本身的类型
-                .peek((menu) -> menu.setSubCategory(findSubCategory(menu.getCatId(), categoryEntities)))
+                //peek : 接收的是Consumer类型，没有返回值 不改变流元素中本身的类型
+                .peek(menu -> menu.setSubCategory(findSubCategory(menu.getCatId(), categoryEntities)))
                 .sorted(Comparator.comparingInt(CategoryEntity::getSort))
                 .collect(Collectors.toList());
     }
-
 
     private List<CategoryEntity> findSubCategory(Long parentId, List<CategoryEntity> menu) {
 
@@ -53,5 +52,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
                 .peek(categoryEntity -> categoryEntity.setSubCategory(findSubCategory(categoryEntity.getCatId(), menu)))
                 .sorted(Comparator.comparingInt(CategoryEntity::getSort))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void removeMenuByIds(List<Long> asList) {
+        baseMapper.deleteBatchIds(asList);
     }
 }
