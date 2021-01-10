@@ -1,19 +1,17 @@
 package com.daizor.mallproduct.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.daizor.mallproduct.entity.BrandEntity;
-import com.daizor.mallproduct.service.BrandService;
 import com.daizor.common.utils.PageUtils;
 import com.daizor.common.utils.R;
+import com.daizor.common.valid.AddGroup;
+import com.daizor.common.valid.UpdateGroup;
+import com.daizor.mallproduct.entity.BrandEntity;
+import com.daizor.mallproduct.service.BrandService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -54,8 +52,18 @@ public class BrandController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody BrandEntity brand) {
+    public R save(@Validated({AddGroup.class}) @RequestBody BrandEntity brand) {
         brandService.save(brand);
+        return R.ok();
+    }
+
+    /**
+     * 修改
+     */
+    @RequestMapping("/update")
+    //@RequiresPermissions("product:brand:update")
+    public R update(@Validated(UpdateGroup.class) @RequestBody BrandEntity brand) {
+        brandService.updateDetail(brand);
 
         return R.ok();
     }
@@ -64,9 +72,8 @@ public class BrandController {
      * 修改
      */
     @RequestMapping("/update/status")
-    public R update(@RequestBody BrandEntity brand) {
+    public R updateStatus(@RequestBody BrandEntity brand) {
         brandService.updateById(brand);
-
         return R.ok();
     }
 
@@ -79,5 +86,6 @@ public class BrandController {
 
         return R.ok();
     }
+
 
 }

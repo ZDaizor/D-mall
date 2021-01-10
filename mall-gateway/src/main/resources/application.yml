@@ -17,6 +17,13 @@ spring:
           filters:
             - RewritePath=/api/product/(?<segment>.*),/mallproduct/$\{segment}
             #                防止机器人频繁刷验证码，同一IP一秒中之内只能访问一次
+        - id: third-party-route
+          uri: lb://mall-thirdparty
+          predicates:
+            - Path=/api/third-party/**
+          filters:
+            - RewritePath=/api/third-party/(?<segment>.*),/$\{segment}
+            
         - id: admin_route
           uri: lb://renren-fast
           predicates:

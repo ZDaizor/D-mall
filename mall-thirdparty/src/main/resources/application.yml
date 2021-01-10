@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+  application:
+    name: mall-thirdparty
+server:
+  port: 30000
+
+aliyun:
+  daizoross:
+    accessId: LTAI4GA5DJGA148pMde84oVs
+    accessKey: toLa8l6J7R0tyK8T8ydufjznyETRGK
+    endpoint: oss-cn-beijing.aliyuncs.com
+    bucket: daizor-mall
