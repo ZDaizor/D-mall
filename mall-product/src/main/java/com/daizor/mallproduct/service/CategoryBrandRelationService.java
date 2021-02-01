@@ -2,8 +2,10 @@ package com.daizor.mallproduct.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.daizor.common.utils.PageUtils;
+import com.daizor.mallproduct.entity.BrandEntity;
 import com.daizor.mallproduct.entity.CategoryBrandRelationEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,5 +24,7 @@ public interface CategoryBrandRelationService extends IService<CategoryBrandRela
     void updateBrand(Long brandId, String name);
 
     void updateNameByCategoryId(Long catId, String name);
+
+    List<BrandEntity> getBrandsByCatId(Long catId);
 }
 

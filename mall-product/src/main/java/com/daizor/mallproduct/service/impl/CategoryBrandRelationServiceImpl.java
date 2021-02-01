@@ -12,11 +12,14 @@ import com.daizor.mallproduct.dao.CategoryDao;
 import com.daizor.mallproduct.entity.BrandEntity;
 import com.daizor.mallproduct.entity.CategoryBrandRelationEntity;
 import com.daizor.mallproduct.entity.CategoryEntity;
+import com.daizor.mallproduct.service.BrandService;
 import com.daizor.mallproduct.service.CategoryBrandRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -31,6 +34,9 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
 
     @Autowired
     private CategoryDao categoryDao;
+
+    @Autowired
+    private BrandService brandService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -66,5 +72,16 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         CategoryBrandRelationEntity categoryBrandRelationEntity = new CategoryBrandRelationEntity();
         categoryBrandRelationEntity.setCatelogName(name);
         update(categoryBrandRelationEntity, new UpdateWrapper<CategoryBrandRelationEntity>().eq("catelog_id", catId));
+    }
+
+    @Override
+    public List<BrandEntity> getBrandsByCatId(Long catId) {
+        List<CategoryBrandRelationEntity> categoryBrandRelationEntities = list(new QueryWrapper<CategoryBrandRelationEntity>()
+                .eq("catelog_id", catId));
+        List<BrandEntity> brandEntities = categoryBrandRelationEntities.stream().map(x -> {
+            Long brandId = x.getBrandId();
+            return brandService.getById(brandId);
+        }).collect(Collectors.toList());
+        return brandEntities;
     }
 }

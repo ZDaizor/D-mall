@@ -3,6 +3,7 @@ package com.daizor.mallproduct.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.daizor.common.utils.PageUtils;
 import com.daizor.mallproduct.entity.AttrAttrgroupRelationEntity;
+import com.daizor.mallproduct.vo.AttrGroupRelationVo;
 
 import java.util.Map;
 
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface AttrAttrgroupRelationService extends IService<AttrAttrgroupRelationEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void deleteRelation(AttrGroupRelationVo[] vos);
 }
 

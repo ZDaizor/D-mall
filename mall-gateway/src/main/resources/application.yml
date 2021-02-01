@@ -23,7 +23,14 @@ spring:
             - Path=/api/third-party/**
           filters:
             - RewritePath=/api/third-party/(?<segment>.*),/$\{segment}
-            
+        #            会员路由
+        - id: member_route
+          uri: lb://mall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/member/(?<segment>.*),/mallmember/$\{segment}
+        #            后台管理路由
         - id: admin_route
           uri: lb://renren-fast
           predicates:

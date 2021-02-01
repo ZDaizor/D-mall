@@ -2,13 +2,16 @@ package com.daizor.mallproduct.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.daizor.common.utils.R;
+import com.daizor.mallproduct.entity.BrandEntity;
 import com.daizor.mallproduct.entity.CategoryBrandRelationEntity;
 import com.daizor.mallproduct.service.CategoryBrandRelationService;
+import com.daizor.mallproduct.vo.BrandVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -32,6 +35,23 @@ public class CategoryBrandRelationController {
         List<CategoryBrandRelationEntity> relationEntities = categoryBrandRelationService
                 .list(new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId));
         return R.ok().put("data", relationEntities);
+    }
+
+    /**
+     * 查询分类下的所有品牌
+     */
+    @RequestMapping("/brands/list")
+    public R relationBrandsList(@RequestParam(value = "catId") Long catId) {
+        List<BrandEntity> brandEntities = categoryBrandRelationService.getBrandsByCatId(catId);
+
+        List<BrandVo> brandVos = brandEntities.stream().map(x -> {
+            BrandVo brandVo = new BrandVo();
+            brandVo.setBrandId(x.getBrandId());
+            brandVo.setBrandName(x.getName());
+            return brandVo;
+        }).collect(Collectors.toList());
+
+        return R.ok().put("data", brandVos);
     }
 
 
